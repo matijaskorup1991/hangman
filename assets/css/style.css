@@ -6,9 +6,18 @@
   cursor: pointer;
 }
 
+h2 {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+article {
+  text-align: center;
+}
+
 #buttons {
   width: 80%;
-  margin: 20vh auto 10vh auto;
+  margin: 10vh auto 10vh auto;
 }
 
 #word {

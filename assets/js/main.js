@@ -26,6 +26,8 @@ const words = [
   'Zugzwang',
 ];
 
+let count = 0;
+
 function createAlphabet(start, end) {
   let arr = new Array(end.charCodeAt(0) - start.charCodeAt(0) + 1)
     .fill(0)
@@ -43,29 +45,69 @@ function random() {
   return words[Math.floor(Math.random() * words.length)];
 }
 
+function createIndex(el) {
+  return el[Math.floor(Math.random() * el.length)];
+}
+
 function shuffle() {
   let word = random();
-  let idx1 = word[Math.floor(Math.random() * word.length)];
-  let idx2 = word[Math.floor(Math.random() * word.length)];
-  let wordToPlay = word.split('').map((el, i) => {
-    if (el === idx1) {
-      return `<span class=${el}>${el}</span>`;
-    } else if (el === idx2) {
-      return `<span class=${el}>${el}</span>`;
-    } else {
-      return `<span class=${el}>_</span>`;
-    }
-  });
+  let diff = $('#difficulty');
+  let idx1 = createIndex(word);
+  let idx2 = createIndex(word);
+  let idx3 = createIndex(word);
+
+  let wordToPlay;
+
+  switch (diff.value) {
+    case 'Easy':
+      wordToPlay = word.split('').map((el, i) => {
+        if (el === idx1) {
+          return `<span class=${el}>${el}</span>`;
+        } else if (el === idx2) {
+          return `<span class=${el}>${el}</span>`;
+        } else if (el === idx3) {
+          return `<span class=${el}>${el}</span>`;
+        } else {
+          return `<span class=${el}>_</span>`;
+        }
+      });
+      break;
+    case 'Medium':
+      wordToPlay = word.split('').map((el, i) => {
+        if (el === idx1) {
+          return `<span class=${el}>${el}</span>`;
+        } else if (el === idx2) {
+          return `<span class=${el}>${el}</span>`;
+        } else {
+          return `<span class=${el}>_</span>`;
+        }
+      });
+      break;
+    case 'Hard':
+      wordToPlay = word.split('').map((el, i) => {
+        if (el === idx1) {
+          return `<span class=${el}>${el}</span>`;
+        } else {
+          return `<span class=${el}>_</span>`;
+        }
+      });
+      break;
+  }
 
   return wordToPlay.join('');
 }
 
-$('#word').innerHTML = shuffle();
+$on($('#difficulty'), 'change', () => {
+  $('#word').innerHTML = shuffle();
+});
 
 $on($$('div'), 'click', (e) => {
-  $$('span').map((el) =>
-    el.classList.value.toLowerCase() == e.target.innerHTML
-      ? (el.innerHTML = e.target.innerHTML)
-      : el
-  );
+  $$('span').map((el) => {
+    if (el.classList.value.toLowerCase() == e.target.innerHTML) {
+      return (el.innerHTML = el.classList.value);
+    } else {
+      return el;
+    }
+  });
+  $('h2').innerHTML = `Count: ${count}`;
 });
