@@ -1,0 +1,18 @@
+#buttons div {
+  display: inline-block;
+  border: 2px solid black;
+  margin: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+#buttons {
+  width: 80%;
+  margin: 20vh auto 10vh auto;
+}
+
+#word {
+  text-align: center;
+  font-size: 4rem;
+  letter-spacing: 5px;
+}
