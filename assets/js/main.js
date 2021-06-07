@@ -52,54 +52,15 @@ function createIndex(el) {
 function shuffle() {
   let word = random();
   let diff = $('#difficulty');
-  let idx1 = createIndex(word);
-  let idx2 = createIndex(word);
-  let idx3 = createIndex(word);
 
-  let wordToPlay;
-
-  switch (diff.value) {
-    case 'Easy':
-      wordToPlay = word.split('').map((el, i) => {
-        if (el === idx1) {
-          return `<span class=${el}>${el}</span>`;
-        } else if (el === idx2) {
-          return `<span class=${el}>${el}</span>`;
-        } else if (el === idx3) {
-          return `<span class=${el}>${el}</span>`;
-        } else {
-          return `<span class=${el}>_</span>`;
-        }
-      });
-      break;
-    case 'Medium':
-      wordToPlay = word.split('').map((el, i) => {
-        if (el === idx1) {
-          return `<span class=${el}>${el}</span>`;
-        } else if (el === idx2) {
-          return `<span class=${el}>${el}</span>`;
-        } else {
-          return `<span class=${el}>_</span>`;
-        }
-      });
-      break;
-    case 'Hard':
-      wordToPlay = word.split('').map((el, i) => {
-        if (el === idx1) {
-          return `<span class=${el}>${el}</span>`;
-        } else {
-          return `<span class=${el}>_</span>`;
-        }
-      });
-      break;
-  }
+  let wordToPlay = word.split('').map((el, i) => {
+    return `<span class=${el}>_</span>`;
+  });
 
   return wordToPlay.join('');
 }
 
-$on($('#difficulty'), 'change', () => {
-  $('#word').innerHTML = shuffle();
-});
+$('#word').innerHTML = shuffle();
 
 $on($$('div'), 'click', (e) => {
   $$('span').map((el) => {
