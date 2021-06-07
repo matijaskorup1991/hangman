@@ -27,6 +27,7 @@ const words = [
 ];
 
 let count = 0;
+let check = true;
 
 function createAlphabet(start, end) {
   let arr = new Array(end.charCodeAt(0) - start.charCodeAt(0) + 1)
@@ -51,7 +52,6 @@ function createIndex(el) {
 
 function shuffle() {
   let word = random();
-  let diff = $('#difficulty');
 
   let wordToPlay = word.split('').map((el, i) => {
     return `<span class=${el}>_</span>`;
@@ -63,6 +63,7 @@ function shuffle() {
 $('#word').innerHTML = shuffle();
 
 $on($$('div'), 'click', (e) => {
+  let letters = $$('span').map((el) => el.className);
   $$('span').map((el) => {
     if (el.classList.value.toLowerCase() == e.target.innerHTML) {
       return (el.innerHTML = el.classList.value);
@@ -70,5 +71,9 @@ $on($$('div'), 'click', (e) => {
       return el;
     }
   });
+
+  if (!letters.includes(e.target.innerHTML)) {
+    count++;
+  }
   $('h2').innerHTML = `Count: ${count}`;
 });
