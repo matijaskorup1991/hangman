@@ -26,8 +26,8 @@ const words = [
   'Zugzwang',
 ];
 
-let count = 0;
-let check = true;
+let count = 0,
+  wordToPlay;
 
 function createAlphabet(start, end) {
   let arr = new Array(end.charCodeAt(0) - start.charCodeAt(0) + 1)
@@ -53,7 +53,7 @@ function createIndex(el) {
 function shuffle() {
   let word = random();
 
-  let wordToPlay = word.split('').map((el, i) => {
+  wordToPlay = word.split('').map((el, i) => {
     return `<span class=${el}>_</span>`;
   });
 
