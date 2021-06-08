@@ -87,7 +87,7 @@ $on($$('div'), 'click', (e) => {
   if (!letters.includes(e.target.innerHTML)) {
     count++;
   }
-  if (count < rounds) {
+  if (count <= rounds) {
     $('h2').innerHTML = `Count: ${count} / ${rounds}`;
   } else {
     $('h2').innerHTML = `Game Over!`;
