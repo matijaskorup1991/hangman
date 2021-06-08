@@ -63,6 +63,8 @@ function shuffle() {
 
 $on($('#difficulty'), 'change', (e) => {
   let { value } = e.target;
+  $('#word').innerHTML = shuffle();
+
   if (value == 'Easy') {
     rounds = wordToPlay.length;
   } else if (value == 'Medium') {
@@ -70,10 +72,7 @@ $on($('#difficulty'), 'change', (e) => {
   } else if (value == 'Hard') {
     rounds = Math.floor(wordToPlay.length / 3);
   }
-  $('#word').innerHTML = shuffle();
 });
-
-// $('#word').innerHTML = shuffle();
 
 $on($$('div'), 'click', (e) => {
   let letters = $$('span').map((el) => el.className);
@@ -88,5 +87,14 @@ $on($$('div'), 'click', (e) => {
   if (!letters.includes(e.target.innerHTML)) {
     count++;
   }
-  $('h2').innerHTML = `Count: ${count}`;
+  if (count < rounds) {
+    $('h2').innerHTML = `Count: ${count}`;
+  } else {
+    $('h2').innerHTML = `Game Over!`;
+    $('#word').style.display = 'none';
+  }
+});
+
+$on($('button'), 'click', () => {
+  window.location.reload();
 });

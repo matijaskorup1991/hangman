@@ -25,3 +25,8 @@ article {
   font-size: 4rem;
   letter-spacing: 5px;
 }
+
+#restart {
+  text-align: center;
+  margin-top: 5vh;
+}
