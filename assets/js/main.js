@@ -27,7 +27,8 @@ const words = [
 ];
 
 let count = 0,
-  wordToPlay;
+  wordToPlay,
+  rounds;
 
 function createAlphabet(start, end) {
   let arr = new Array(end.charCodeAt(0) - start.charCodeAt(0) + 1)
@@ -60,7 +61,19 @@ function shuffle() {
   return wordToPlay.join('');
 }
 
-$('#word').innerHTML = shuffle();
+$on($('#difficulty'), 'change', (e) => {
+  let { value } = e.target;
+  if (value == 'Easy') {
+    rounds = wordToPlay.length;
+  } else if (value == 'Medium') {
+    rounds = Math.floor(wordToPlay.length / 2);
+  } else if (value == 'Hard') {
+    rounds = Math.floor(wordToPlay.length / 3);
+  }
+  $('#word').innerHTML = shuffle();
+});
+
+// $('#word').innerHTML = shuffle();
 
 $on($$('div'), 'click', (e) => {
   let letters = $$('span').map((el) => el.className);
